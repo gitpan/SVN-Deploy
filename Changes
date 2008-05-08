@@ -1,0 +1,6 @@
+Revision history for Perl extension SVN::Deploy.
+
+0.1 Wed Apr 23 10:55:41 2008
+	- original version; created by h2xs 1.23 with options
+		-X -n SVN::Deploy
+

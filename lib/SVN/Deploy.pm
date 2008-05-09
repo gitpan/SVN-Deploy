@@ -3,7 +3,7 @@ package SVN::Deploy;
 use strict;
 use warnings;
 
-our $VERSION = '0.1';
+our $VERSION = '0.11';
 use Carp;
 
 use Cwd;

@@ -79,17 +79,21 @@ $rc = $deploy->category_add(category =>'Cat2');
 ok($rc, 'add category 2')
     or diag($deploy->lasterr);
 
+my $perlbin = $^X =~ /\s/
+            ? '"' . $^X . '"'
+            : $^X;
+
 # create a product
 my %prod1_cfg = (
     category => 'Cat1',
     product  => 'Prod1',
     cfg      => {
-        build  => ['[os]perl ' . catfile($abs_t, 'build.pl')],
+        build  => ["[os]$perlbin " . catfile($abs_t, 'build.pl')],
         source => ["$repo_root/source/subdir1"],
         qa => {
             dest => [catdir($abs_t, 'qa')],
-            pre  => ['[os]perl ' . catfile($abs_t, 'pre.pl')],
-            post => ['[os]perl ' . catfile($abs_t, 'post.pl')],
+            pre  => ["[os]$perlbin " . catfile($abs_t, 'pre.pl')],
+            post => ["[os]$perlbin " . catfile($abs_t, 'post.pl')],
         },
         prod => {
             dest => [],
@@ -155,8 +159,8 @@ ok($rc, "delete empty category Cat3")
 # update product
 $prod1_cfg{cfg}{prod} = {
     dest => [catdir($abs_t, 'prod')],
-    pre  => ['[os]perl ' . catfile($abs_t, 'pre.pl')],
-    post => ['[os]perl ' . catfile($abs_t, 'post.pl')],
+    pre  => ["[os]$perlbin " . catfile($abs_t, 'pre.pl')],
+    post => ["[os]$perlbin " . catfile($abs_t, 'post.pl')],
 };
 $rc = $deploy->product_update(%prod1_cfg);
 ok($rc, "update product 1")
